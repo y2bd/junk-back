@@ -20,7 +20,7 @@ function getBoard(res) {
         const board = Math.floor(Math.random() * BOARDS) + 1;
         console.log("Serving board " + board);
 
-        const response = board + "," + String(new Date().getTime()) + "," + status.boards[String(board)].board
+        const response = board + "," + String(new Date().getTime()) + "," + status.boards[String(board)].name + "," + status.boards[String(board)].board
         res.send(response);
     });
 }
@@ -38,7 +38,8 @@ function setBoard(req, res) {
         const parsed = req.query.data.split(",");
         const boardNum = parsed[0];
         const lm = parsed[1];
-        const newData = parsed[2];
+        const name = parsed[2];
+        const newData = parsed[3];
 
         if (isNaN(Number(boardNum)) || Number(boardNum) < 1 || Number(boardNum) > 5) {
             return;
@@ -48,12 +49,21 @@ function setBoard(req, res) {
             return;
         }
 
+        for (let bw of badwords) {
+            const check = name.replace(/[0-9-? _]/g, '')
+            if (check.indexOf(bw) >= 0) {
+                name = ["ld40", "gam3_play3r", "hunter2", "lava-lamp", "xx3lsch0r4h0xx", "testacct", "qwerty", "snowman-emoji"][Math.floor(Math.random() * 8)];
+                break;
+            }
+        }
+
         if (isNaN(Number(newData))) {
             return;
         }
 
         if (Number(lm) > Number(status.boards[boardNum].lm)) {
             status.boards[boardNum].board = newData;
+            status.boards[boardNum].name = name;
             status.boards[boardNum].lm = lm;
         }
 
@@ -70,7 +80,16 @@ function setBoard(req, res) {
     res.send("thanks");
 }
 
-express()
-    .get('/board', (req, res) => getBoard(res))
-    .get('/submitboard', (req, res) => setBoard(req, res))
-    .listen(PORT, () => console.log(`Listening on ${PORT}`))
+const badwords = []
+fs.readFile("badwords.txt", "utf8", function (err,data) {
+    if (err) {
+        console.error(err);
+    } else {
+        badwords = data.split("\n")
+    }
+
+    express()
+        .get('/board', (req, res) => getBoard(res))
+        .get('/submitboard', (req, res) => setBoard(req, res))
+        .listen(PORT, () => console.log(`Listening on ${PORT}`))
+});
