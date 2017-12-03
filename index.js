@@ -71,9 +71,6 @@ function setBoard(req, res) {
 }
 
 express()
-    .use(express.static(path.join(__dirname, 'public')))
-    .set('views', path.join(__dirname, 'views'))
-    .set('view engine', 'ejs')
     .get('/board', (req, res) => getBoard(res))
     .get('/submitboard', (req, res) => setBoard(req, res))
     .listen(PORT, () => console.log(`Listening on ${PORT}`))
