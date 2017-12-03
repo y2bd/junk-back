@@ -52,7 +52,7 @@ function setBoard(req, res) {
         for (let bw of badwords) {
             const check = name.replace(/[0-9-? _]/g, '')
             if (check.indexOf(bw) >= 0) {
-                name = ["ld40", "gam3_play3r", "hunter2", "lava-lamp", "xx3lsch0r4h0xx", "testacct", "qwerty", "snowman-emoji"][Math.floor(Math.random() * 8)];
+                name = ["ld40", "gam3_play3r", "hunter2", "lava_lamp", "xx3lsch0r4h0xx", "testacct", "qwerty", "snowman_emoji"][Math.floor(Math.random() * 8)];
                 break;
             }
         }
