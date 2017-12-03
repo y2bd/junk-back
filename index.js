@@ -85,7 +85,7 @@ fs.readFile("badwords.txt", "utf8", function (err,data) {
     if (err) {
         console.error(err);
     } else {
-        badwords = data.split("\n")
+        badwords = data.trim().split("\n")
     }
 
     express()
@@ -93,3 +93,4 @@ fs.readFile("badwords.txt", "utf8", function (err,data) {
         .get('/submitboard', (req, res) => setBoard(req, res))
         .listen(PORT, () => console.log(`Listening on ${PORT}`))
 });
+
