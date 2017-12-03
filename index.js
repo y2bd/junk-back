@@ -38,7 +38,7 @@ function setBoard(req, res) {
         const parsed = req.query.data.split(",");
         const boardNum = parsed[0];
         const lm = parsed[1];
-        const name = parsed[2];
+        let name = parsed[2];
         const newData = parsed[3];
 
         if (isNaN(Number(boardNum)) || Number(boardNum) < 1 || Number(boardNum) > 5) {
@@ -80,7 +80,7 @@ function setBoard(req, res) {
     res.send("thanks");
 }
 
-const badwords = []
+let badwords = []
 fs.readFile("badwords.txt", "utf8", function (err,data) {
     if (err) {
         console.error(err);
