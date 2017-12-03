@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
+  "name": "ld40-backend",
   "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "The backend for an LD40 project",
   "engines": {
     "node": "8.9.1"
   },
