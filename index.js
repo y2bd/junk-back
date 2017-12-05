@@ -18,7 +18,7 @@ function getBoard(res) {
         const status = JSON.parse(data);
 
         const board = Math.floor(Math.random() * BOARDS) + 1;
-        console.log("Serving board " + board);
+        // console.log("Serving board " + board);
 
         const response = board + "," + String(new Date().getTime()) + "," + status.boards[String(board)].name + "," + status.boards[String(board)].board
         res.send(response);
@@ -65,9 +65,11 @@ function setBoard(req, res) {
             status.boards[boardNum].board = newData;
             status.boards[boardNum].name = name;
             status.boards[boardNum].lm = lm;
+	    console.log("actually going into: ")
         }
 
         const newStatus = JSON.stringify(status);
+        console.log(newStatus);
         fs.writeFile("status.json", newStatus, 'utf8', (err) => {
             if (err) {
                 console.error(err);
