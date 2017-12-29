@@ -3,7 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const PORT = process.env.PORT || 9232
 
-const BOARDS = 5;
+const BOARDS = 6;
 
 function getBoard(res) {
     const board = Math.floor(Math.random() * BOARDS) + 1
@@ -18,7 +18,7 @@ function getBoard(res) {
         const status = JSON.parse(data);
 
         const board = Math.floor(Math.random() * BOARDS) + 1;
-        // console.log("Serving board " + board);
+        console.log("Serving board " + board);
 
         const response = board + "," + String(new Date().getTime()) + "," + status.boards[String(board)].name + "," + status.boards[String(board)].board
         res.send(response);
