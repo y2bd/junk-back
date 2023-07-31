@@ -61,7 +61,7 @@ function setBoard(req, res) {
             return;
         }
 
-        if (Number(lm) > Number(status.boards[boardNum].lm)) {
+        if (Number(lm) > Number(status.boards[boardNum].lm) && Number(lm) < new Date().getTime()) {
             status.boards[boardNum].board = newData;
             status.boards[boardNum].name = name;
             status.boards[boardNum].lm = lm;
