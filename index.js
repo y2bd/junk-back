@@ -57,7 +57,7 @@ function setBoard(req, res) {
             }
         }
 
-        if (isNaN(Number(newData))) {
+        if (isNaN(Number(newData)) || !/^(?:[0-7]{10})+$/.test(newData)) {
             return;
         }
 
